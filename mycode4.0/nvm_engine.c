@@ -410,7 +410,7 @@ int nvm_Del(char * _key){
       if(last_index==-1){          
           entry[hash_val] = hashmap[index].next;
       }else{
-
+          hashmap[last_index].next= hashmap[index].next;
       }
       return 1;
     }    
