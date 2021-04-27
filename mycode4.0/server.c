@@ -36,6 +36,7 @@ static struct ibv_send_wr send_wr, *bad_send_wr = NULL;
 static struct ibv_sge recv_sge, send_sge;
 static struct rdma_buffer_attr server_metadata_attr;
 int itimes = 0;
+int verbose=0;
 void parse_command(char * str){ 	
   int  num = str[0]-'0';
   char * key= malloc(KEY_LEN);
@@ -417,7 +418,9 @@ static int recv_data_and_post_next_recv()
 		return ret;
 	}
 	/* if all good, then we should have client's buffer information, lets see */
-//	printf("recved message:%s,len:%d\n",recv_region,strlen(recv_region));
+    if(verbose){
+        printf("recved message:%s,len:%d\n",recv_region,strlen(recv_region));
+    }
 	sprintf(recv_buffer,recv_region);	
 	memset(recv_region,0,sizeof(recv_region));
 
@@ -455,7 +458,9 @@ static int post_send()
 		return ret;
 	}
 	// debug("Server sent us its buffer location and credentials, showing \n");
-	// printf("sended message:%s,len:%d\n",send_region,strlen(send_region));
+    if(verbose){
+	    printf("sended message:%s,len:%d\n",send_region,strlen(send_region));
+    }
 	return 0;
 }
 
@@ -529,11 +534,10 @@ static int disconnect_and_cleanup()
 void usage() 
 {
 	printf("Usage:\n");
-	printf("rdma_server: [-a <server_addr>] [-p <server_port>]\n");
-	printf("(default port is %d)\n", DEFAULT_RDMA_PORT);
-	exit(1);
+    printf("./server: [-v <1 or 0>] \n");
+    printf("(default -v is 0 representing not printf\n");
+    exit(1);
 }
-
 void init_nvm_file( char * _name){
  
 	//  int isPmem;
@@ -578,6 +582,17 @@ int main(int argc, char **argv)
  	init_nvm_file("./db1");
 	// init_nvm_file("../pmem6/db");
 	printf("server:file_buffer:%p\n",file_buffer);
+     int option;
+    while ((option = getopt(argc, argv, "v:")) != -1) {
+	    switch (option) {			
+            case 'v':
+                verbose = strtol(optarg, NULL, 0);
+                break;
+            default:
+                usage();			
+                break;
+		}
+	}
 	init_hashmap();
 	int ret;
 	struct sockaddr_in server_sockaddr;

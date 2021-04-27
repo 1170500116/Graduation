@@ -5,7 +5,7 @@ run ./3.sh to distribute mycode4.0 to 192.168.98.50~52 and modify some  paramete
 
 cd mycode4.0/
 ### Server: ###    
-    - ./server  
+    - ./server  -v <0 or 1 (default:0 not printf)>
 
 ### Client: ###    
     - ./client
