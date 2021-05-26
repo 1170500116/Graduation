@@ -877,7 +877,7 @@ int main(int argc, char **argv) {
  	int ret,i;
 
 
-    // srand((unsigned) time(NULL ));
+    srand((unsigned) time(NULL ));
 	char _key[KEY_LEN+1] ; 
 	char _value[VALUE_MAX_LEN+1]; 
 	char * ans_value = NULL;
