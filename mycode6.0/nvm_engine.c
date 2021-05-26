@@ -177,15 +177,15 @@ int nvm_Del(char * _key,HASH_VALUE hash_val,char* _lock){
         index =  hashmap[index].next;
     }    
     if(block_index!=-1){
-      int block_num =  (hashmap[index].record_len+ BLOCK_SIZE - 1) / BLOCK_SIZE;
-      Delete(block_index,block_num);     
-      hash_flag[index]=0;
-      if(last_index==-1){          
-          entry[hash_val] = hashmap[index].next;
-      }else{
-           hashmap[last_index].next= hashmap[index].next;
-      }
-      return ret;//lock does not exist ,deleted the key and value,1
+        int block_num =  (hashmap[index].record_len+ BLOCK_SIZE - 1) / BLOCK_SIZE;
+        Delete(block_index,block_num);     
+        hash_flag[index]=0;
+        if(last_index==-1){          
+            entry[hash_val] = hashmap[index].next;
+        }else{
+            hashmap[last_index].next= hashmap[index].next;
+        }
+        return ret;//lock does not exist ,deleted the key and value,1
     }    
     return ret;//key does not exist,0;lock is now occupied,2;
 }

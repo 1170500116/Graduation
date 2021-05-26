@@ -894,15 +894,15 @@ int main(int argc, char **argv) {
 			printf("i=%d-----------------------------------------------------------\n",itimes);
 		}
 		
-		// keylen = rand()%KEY_LEN+2;	       
-		// genRandomString(_key ,keylen) ;        
-		// //value_len = VALUE_MAX_LEN;
-		// value_len = rand()%VALUE_MAX_LEN+2;//2-VALUE_MAX_LEN+1
-		// genRandomString(&_value ,value_len) ;	
-        keylen=1;
-        snprintf(_key,KEY_LEN,"a\0");	
-        value_len=5;
-        snprintf(_value,VALUE_MAX_LEN,"aaabb\0");
+		keylen = rand()%KEY_LEN+2;	       
+		genRandomString(_key ,keylen) ;        
+		//value_len = VALUE_MAX_LEN;
+		value_len = rand()%VALUE_MAX_LEN+2;//2-VALUE_MAX_LEN+1
+		genRandomString(&_value ,value_len) ;	
+        // keylen=1;
+        // snprintf(_key,KEY_LEN,"a\0");	
+        // value_len=5;
+        // snprintf(_value,VALUE_MAX_LEN,"aaabb\0");
 
        //     printf("%s:%s\n",_key,_value);
 		start = clock(); 
