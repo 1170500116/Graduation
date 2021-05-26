@@ -52,6 +52,7 @@ rm -f db1
 rm -f core*
 cd ..
 let a=0
+let i=40
 # for((i=40;i<=40;i++));
 # do
     ip=192.168.98.$i
