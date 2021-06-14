@@ -1,0 +1,36 @@
+./8.sh
+lsblk
+sudo mkfs.ext4 /dev/pmemx
+mkdir -p ~/nvm
+sudo mount /dev/pmemx ~/nvm
+sudo chmod 777 /mnt/ -R
+
+
+单client演示命令
+cd ./mycode8.0
+./slave
+./server -v 1
+./client -v 1  -i 1 -l 60
+./client -v 0  -i 5000 -l 1024
+./client -v 0  -i 5000 -a 32 -b 8096
+
+多client演示命令
+./slave
+./server -v 0
+./9.sh  -v 0  -i 1000 -l 1024 -n 5
+
+
+多server演示命令
+./10.sh -v 0 -i 1000 -l 1024 -n 5 -s 10
+./11.sh
+./12.sh
+
+验证比较：
+ scp -3  ../nvm/db1 wanru@192.168.98.40:/home/wanru
+ diff -c  db1 ./nvm/db1
+
+
+
+
+
+
